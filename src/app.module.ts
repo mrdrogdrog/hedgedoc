@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PublicApiModule } from './api/public/public-api.module';
 import { AuthorsModule } from './authors/authors.module';
@@ -11,6 +12,7 @@ import { NotesModule } from './notes/notes.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { RevisionsModule } from './revisions/revisions.module';
 import { UsersModule } from './users/users.module';
+import appConfig from './config/app.config';
 
 @Module({
   imports: [
@@ -19,6 +21,9 @@ import { UsersModule } from './users/users.module';
       database: './hedgedoc.sqlite',
       autoLoadEntities: true,
       synchronize: true,
+    }),
+    ConfigModule.forRoot({
+      load: [appConfig],
     }),
     NotesModule,
     UsersModule,
