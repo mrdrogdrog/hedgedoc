@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import { ConsoleLoggerService } from '../../logger/console-logger.service';
@@ -7,11 +8,16 @@ import { BackendData } from '../media-upload.entity';
 
 @Injectable()
 export class FilesystemBackend implements MediaBackend {
-  // TODO: Get uploads directory from config
   uploadDirectory = './uploads';
 
-  constructor(private readonly logger: ConsoleLoggerService) {
+  constructor(
+    private readonly logger: ConsoleLoggerService,
+    private configService: ConfigService,
+  ) {
     this.logger.setContext(FilesystemBackend.name);
+    this.uploadDirectory = configService.get<string>(
+      'media.backend.filesystem.uploadPath',
+    );
   }
 
   private getFilePath(fileName: string): string {
