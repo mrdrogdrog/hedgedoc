@@ -26,6 +26,9 @@ Please note we have a [code of conduct][code-of-conduct], please follow it in al
 * Ensure the PR description is precise about the problem and your solution. Just fill out our template. That should
   cover the most important information.
 
+* Please note that we only accept PRs for the 1.x releases if they fix critical issues. If you are unsure if your fix is
+  critical, it's best to ask us before you start coding.
+
 ### Do you intend to add a new feature or change an existing one?
 
 * Suggest your idea via a new GitHub issue. After a confirmation about your idea, you can start writing code. Our
